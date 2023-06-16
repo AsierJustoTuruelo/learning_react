@@ -1,0 +1,32 @@
+[
+    {
+      "id": 1,
+      "name": "Merida",
+      "price": 4999,
+      "imgUrl": "./merida.jpg",
+      "description": "La bicicleta Merida Doble es una bicicleta de montaña resistente y versátil, diseñada para terrenos irregulares y senderos técnicos. Cuenta con un marco ligero de aluminio o carbono, suspensión delantera y trasera, transmisión de alta gama y frenos de disco hidráulicos. Es ideal para aventuras todoterreno con un rendimiento óptimo y control en diferentes condiciones."
+    },
+    {
+      "id": 2,
+      "name": "Scott",
+      "price": 8500,
+      "imgUrl": "./scott.jpg",
+      "description": "La bicicleta Scott Spark es una bicicleta de montaña diseñada para ofrecer un rendimiento excepcional en terrenos técnicos y exigentes. Con un marco resistente y ligero de aluminio o carbono, la Scott Spark cuenta con suspensión delantera y trasera para una conducción suave y mayor absorción de impactos. Equipada con componentes de alta gama, como transmisiones Shimano o Sram, la bicicleta Scott Spark ofrece una amplia variedad de velocidades para adaptarse a diferentes terrenos y condiciones. Además, cuenta con frenos de disco hidráulicos de calidad para un frenado preciso y efectivo. Con respecto a las ruedas, la Scott Spark puede venir con ruedas de 27.5 o 29, brindando tracción y capacidad para superar obstáculos en senderos técnicos."
+    },
+    {
+      "id": 3,
+      "name": "Orbea",
+      "price": 4000,
+      "imgUrl": "./orbea.jpg",
+      "description": "La bicicleta Orbea es una bicicleta de alta calidad, diseñada con marcos de aluminio o carbono de primera calidad. Ofrece un rendimiento excepcional y está equipada con componentes de alto nivel, como sistemas de transmisión de alta gama y frenos de disco hidráulicos. Las bicicletas Orbea son reconocidas por su innovación, diseño ergonómico y variedad de modelos para diferentes disciplinas."
+
+      
+    },
+    {
+      "id": 4,
+      "name": "BH",
+      "price": 4500,
+      "imgUrl": "./BH.jpg",
+      "description": "Las bicicletas BH son reconocidas por su calidad, rendimiento y durabilidad. Construidas con marcos de alta calidad en materiales como aluminio o carbono, ofrecen una conducción cómoda y eficiente. Equipadas con componentes de alto rendimiento de marcas reconocidas, brindan una amplia gama de velocidades y frenado preciso. Disponibles en diferentes modelos para diversas disciplinas, las bicicletas BH ofrecen una experiencia excepcional para ciclistas exigentes."
+    }
+  ]
