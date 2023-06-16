@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Detalles } from '../paginas/detalles';
 import storeItems from '../data/products.json';
 
 export const Productos = ({ setCarritoCount }) => {
+  const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+
   const guardarProductoEnCarrito = (producto) => {
     const cartItems = localStorage.getItem('cartItems')
       ? JSON.parse(localStorage.getItem('cartItems'))
@@ -16,18 +19,29 @@ export const Productos = ({ setCarritoCount }) => {
     setCarritoCount((prevCount) => prevCount + 1);
   };
 
+  const mostrarDetalles = (product) => {
+    setProductoSeleccionado(product);
+  };
+
+  const cerrarDetalles = () => {
+    setProductoSeleccionado(null);
+  };
+
   return (
     <div className="products-container">
       {storeItems.map((product, id) => {
-        console.log(product.imgUrl);
         return (
           <div className="product-container" key={id}>
             <div>
-              <img src={product.imgUrl} alt="" />
+              <img
+                src={product.imgUrl}
+                alt=""
+                onClick={() => mostrarDetalles(product)}
+              />
             </div>
             <div>
               <h2 className="bike">{product.name}</h2>
-              <h3 className="price"> {product.price}$</h3>
+              <h3 className="price"> {product.price} $</h3>
               <button className="add-cart" onClick={() => handleAddToCart(product)}>
                 Añadir al carrito
               </button>
@@ -38,6 +52,9 @@ export const Productos = ({ setCarritoCount }) => {
           </div>
         );
       })}
+      {productoSeleccionado && (
+        <Detalles producto={productoSeleccionado} onClose={cerrarDetalles} />
+      )}
     </div>
   );
 };

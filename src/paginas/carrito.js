@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../images/fussion.jpeg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import storeItems from '../data/products.json';
 
 export const Carrito = () => {
-  const [menuVisible, setMenuVisible] = useState(false);
   const [carritoCount, setCarritoCount] = useState(0);
   const [productosAgrupados, setProductosAgrupados] = useState({});
+  const [precioTotal, setPrecioTotal] = useState(0); // Nuevo estado para el precio total
 
   useEffect(() => {
     const cartItems = localStorage.getItem('cartItems')
@@ -28,13 +23,14 @@ export const Carrito = () => {
 
     setProductosAgrupados(productosAgrupados);
     actualizarCarritoCount(productosAgrupados);
+    actualizarPrecioTotal(productosAgrupados); // Calcular el precio total inicial
   }, []);
 
   const handleAumentarCantidad = (id) => {
     const updatedProductosAgrupados = { ...productosAgrupados };
     updatedProductosAgrupados[id].cantidad += 1;
     setProductosAgrupados(updatedProductosAgrupados);
-    actualizarPrecioTotal(id);
+    actualizarPrecioTotal(updatedProductosAgrupados);
     actualizarLocalStorage(updatedProductosAgrupados);
     actualizarCarritoCount(updatedProductosAgrupados);
   };
@@ -44,7 +40,7 @@ export const Carrito = () => {
     if (updatedProductosAgrupados[id].cantidad > 1) {
       updatedProductosAgrupados[id].cantidad -= 1;
       setProductosAgrupados(updatedProductosAgrupados);
-      actualizarPrecioTotal(id);
+      actualizarPrecioTotal(updatedProductosAgrupados);
       actualizarLocalStorage(updatedProductosAgrupados);
       actualizarCarritoCount(updatedProductosAgrupados);
     } else {
@@ -55,11 +51,13 @@ export const Carrito = () => {
     }
   };
 
-  const actualizarPrecioTotal = (id) => {
-    const updatedProductosAgrupados = { ...productosAgrupados };
-    const product = updatedProductosAgrupados[id];
-    product.precioTotal = product.cantidad * product.price;
-    setProductosAgrupados(updatedProductosAgrupados);
+  const actualizarPrecioTotal = (updatedProductosAgrupados) => {
+    let total = 0;
+    Object.values(updatedProductosAgrupados).forEach((product) => {
+      const { cantidad, price } = product;
+      total += cantidad * price;
+    });
+    setPrecioTotal(total);
   };
 
   const actualizarLocalStorage = (updatedCartItems) => {
@@ -69,7 +67,6 @@ export const Carrito = () => {
       localStorage.setItem('cartItems', JSON.stringify(Object.values(updatedCartItems)));
     }
   };
-  
 
   const actualizarCarritoCount = (updatedCartItems) => {
     let count = 0;
@@ -78,6 +75,17 @@ export const Carrito = () => {
       count += parseInt(cantidad, 10);
     });
     setCarritoCount(count);
+  };
+
+  const tramitarPago = () => {
+    // Simulación de proceso de pago
+    console.log('Procesando pago...');
+
+    // Aquí puedes agregar tu lógica de pago real
+    // Realizar una solicitud a una pasarela de pago, procesar información, etc.
+
+    // Luego de tramitar el pago, puedes realizar alguna acción adicional,
+    // como mostrar una notificación, redireccionar a otra página, etc.
   };
 
   return (
@@ -98,11 +106,16 @@ export const Carrito = () => {
                 <span>{cantidad}</span>
                 <button onClick={() => handleAumentarCantidad(id)}>+</button>
               </div>
-              <p className="producto-precio">Precio Total: {precioTotal}$</p>
+              <p className="producto-precio">Precio por Unidad: {price}$</p>
             </div>
           </div>
         );
       })}
+      <div className="total-container">
+        <h3>Total:</h3>
+        <p>{precioTotal}$</p>
+      </div>
+      <button onClick={tramitarPago}>Pagar</button>
     </div>
   );
 };
