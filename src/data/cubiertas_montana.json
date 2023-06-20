@@ -1,0 +1,17 @@
+[
+    {
+      "name": "Maxxis Rekon",
+      "price": 29.99,
+      "image": "./maxxis-rekon.jpg"
+    },
+    {
+      "name": "Maxxis Aspen Exo TR",
+      "price": 39.99,
+      "image": "./maxxis-aspen.jpg"
+    },
+    {
+      "name": "CUBIERTA VITTORIA E-BARZO G2.0",
+      "price": 49.99,
+      "image": "./vittoria-barzo.jpg"
+    }
+  ]

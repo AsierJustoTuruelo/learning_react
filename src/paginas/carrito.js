@@ -49,15 +49,20 @@ export const Carrito = () => {
       actualizarLocalStorage(updatedProductosAgrupados);
       actualizarCarritoCount(updatedProductosAgrupados);
     }
+    actualizarPrecioTotal(updatedProductosAgrupados); // Actualizar el precio total después de eliminar un producto
   };
 
   const actualizarPrecioTotal = (updatedProductosAgrupados) => {
-    let total = 0;
-    Object.values(updatedProductosAgrupados).forEach((product) => {
-      const { cantidad, price } = product;
-      total += cantidad * price;
-    });
-    setPrecioTotal(total);
+    if (Object.keys(updatedProductosAgrupados).length === 0) {
+      setPrecioTotal(0);
+    } else {
+      let total = 0;
+      Object.values(updatedProductosAgrupados).forEach((product) => {
+        const { cantidad, price } = product;
+        total += cantidad * price;
+      });
+      setPrecioTotal(total);
+    }
   };
 
   const actualizarLocalStorage = (updatedCartItems) => {
@@ -106,14 +111,14 @@ export const Carrito = () => {
                 <span>{cantidad}</span>
                 <button onClick={() => handleAumentarCantidad(id)}>+</button>
               </div>
-              <p className="producto-precio">Precio por Unidad: {price}$</p>
+              <p className="producto-precio">Precio por Unidad: {price}€</p>
             </div>
           </div>
         );
       })}
       <div className="total-container">
         <h3>Total:</h3>
-        <p>{precioTotal}$</p>
+        <p>{precioTotal}€</p>
       </div>
       <button onClick={tramitarPago}>Pagar</button>
     </div>

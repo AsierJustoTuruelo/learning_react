@@ -29,8 +29,10 @@ export const Productos = ({ setCarritoCount }) => {
 
   return (
     <div className="products-container">
-      {storeItems.map((product, id) => {
-        return (
+      {productoSeleccionado ? (
+        <Detalles producto={productoSeleccionado} onClose={cerrarDetalles} />
+      ) : (
+        storeItems.map((product, id) => (
           <div className="product-container" key={id}>
             <div>
               <img
@@ -41,8 +43,11 @@ export const Productos = ({ setCarritoCount }) => {
             </div>
             <div>
               <h2 className="bike">{product.name}</h2>
-              <h3 className="price"> {product.price} $</h3>
-              <button className="add-cart" onClick={() => handleAddToCart(product)}>
+              <h3 className="price"> {product.price} €</h3>
+              <button
+                className="add-cart"
+                onClick={() => handleAddToCart(product)}
+              >
                 Añadir al carrito
               </button>
             </div>
@@ -50,10 +55,7 @@ export const Productos = ({ setCarritoCount }) => {
               <p className="desc-text">{product.description}</p>
             </div>
           </div>
-        );
-      })}
-      {productoSeleccionado && (
-        <Detalles producto={productoSeleccionado} onClose={cerrarDetalles} />
+        ))
       )}
     </div>
   );

@@ -5,6 +5,7 @@ import { MenuDesplegable } from './menu-desp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
+
 export const Barra = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [carritoCount, setCarritoCount] = useState(0);
@@ -19,6 +20,10 @@ export const Barra = () => {
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
+  };
+
+  const closeMenu = () => {
+    setMenuVisible(false);
   };
 
   useEffect(() => {
@@ -45,7 +50,7 @@ export const Barra = () => {
         <button className="menu-button" onClick={toggleMenu}>
           <FontAwesomeIcon icon={faBars} />
         </button>      
-        <Link to="/">
+        <Link to="/" onClick={closeMenu}>
           <img src={logo} alt='Fussion Bike' className='image-home'></img>
         </Link>
         <h1 className='title'>Fussion Bike</h1>
@@ -53,11 +58,11 @@ export const Barra = () => {
       <nav className="nav">
         <ul className="nav-list">
           <li>
-            Carrito: <Link to="/carrito">{carritoCount}</Link>
+            Carrito: <Link to="/carrito" onClick={closeMenu}>{carritoCount}</Link>
           </li>
         </ul>
       </nav>
-      {menuVisible && <MenuDesplegable />}
+      {menuVisible && <MenuDesplegable onClose={closeMenu} />}
     </header>
   );
 };
